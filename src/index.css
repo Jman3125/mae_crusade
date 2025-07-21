@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue&family=Bangers&display=swap');
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: white;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Comic Neue', sans-serif;
+
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+h1 {
+  font-size: 4em;
+  font-family: 'Bangers', cursive;
+
+}
+
+hr {
+  height: 1px;
+  background-color: rgb(52, 51, 51);
+  border: none;
+  width: 100%;
+}
+
+@media screen and (max-width: 950px) {
+  body {
+    background: linear-gradient(
+    to bottom,
+    rgba(254, 191, 19, 1) 0%,
+    #f3501a 70vh,
+    white 100vh,
+    white 100%);
+  }
+}
