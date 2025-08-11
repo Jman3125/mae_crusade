@@ -1,14 +1,18 @@
 import "./App.css";
-import ShirtCell from "./cells/ShirtCell.tsx";
+import ItemGridCell from "./cells/ItemGridCell";
+import { PresetData } from "./Models/PresetData";
 
 const item = () => {
+  // Fetch all shirts from PresetData
+  const items = PresetData.getAllPresets();
+
   return (
     <div className="shop_main">
       {/* <h1>The Cowboy's Crusade</h1> */}
       <div className="main_content">
         <img
           className="comic_img"
-          src="src/assets/comic-book.png"
+          src="src/assets/comic-book.jpeg"
           alt="cowboy's crusade"
         />
 
@@ -16,54 +20,39 @@ const item = () => {
           <div>
             <h2>About</h2>
             <span>
-              Mammals don't lay eggs as their primary method of reproduction due
-              to evolutionary adaptations favoring internal development and live
-              birth. While some mammals, like platypuses and echidnas, are
-              monotremes and still lay eggs, the vast majority of mammals have
-              evolved to gestate their young internally, nourishing them through
-              a placenta. This shift offers advantages like a more protected
-              environment for development and the ability to move freely during
-              pregnancy.{" "}
+              In a futuristic society built upon the idea of survival of the
+              fittest, the world is run by champions. Divided into three
+              categories; guns, material arts, and sword. A lone Cowboy sets out
+              on a mysterious quest. Filled with action, mystery, and fun; the
+              story of The Cowboy’s Crusade is only beginning and you won’t want
+              to miss the start. <a href="/faq">More Info</a>
             </span>
           </div>
-
-          <button>{"$5 - "}Buy Now</button>
+          <button
+            onClick={() =>
+              (window.location.href =
+                "https://buy.stripe.com/4gM9AMgaCgT5062aIQ77O00")
+            }
+          >
+            {"$5 - "}Buy Now
+          </button>
         </div>
       </div>
 
       <h1>Apparel</h1>
 
-      <div className="shirt_layout">
-        <ShirtCell
-          shirtFront={"src/assets/shirt_1.webp"}
-          shirtBack={"src/assets/shirt_back.avif"}
-          shirtTitle={"Light dark mens T"}
-          price={15}
-        />
-        <ShirtCell
-          shirtFront={"src/assets/shirt_1.webp"}
-          shirtBack={"src/assets/shirt_back.avif"}
-          shirtTitle={"Light dark mens T"}
-          price={15}
-        />
-        <ShirtCell
-          shirtFront={"src/assets/shirt_1.webp"}
-          shirtBack={"src/assets/shirt_back.avif"}
-          shirtTitle={"Light dark mens T"}
-          price={15}
-        />
-        <ShirtCell
-          shirtFront={"src/assets/shirt_1.webp"}
-          shirtBack={"src/assets/shirt_back.avif"}
-          shirtTitle={"Light dark mens T"}
-          price={15}
-        />
-        <ShirtCell
-          shirtFront={"src/assets/shirt_1.webp"}
-          shirtBack={"src/assets/shirt_back.avif"}
-          shirtTitle={"Light dark mens T"}
-          price={15}
-        />
+      <div className="item_layout">
+        {items.map((item) => (
+          <ItemGridCell
+            key={item.id}
+            itemId={item.id}
+            itemFront={item.item1}
+            itemBack={item.item2 || ""}
+            itemTitle={item.title}
+            price={item.price}
+            hasBack={item.hasBack}
+          />
+        ))}
       </div>
     </div>
   );

@@ -1,10 +1,16 @@
 import "./App.css";
 import { useState } from "react";
+import logo from "./assets/logo.png";
+import closeX from "./assets/close.svg";
+import menuIcon from "./assets/menu.svg";
 
 const Layout = () => {
+  // State to manage the sidebar visibility
   const [showMenu, showingMenu] = useState(false);
+  // Function to toggle the sidebar
   const toggleSideBar = () => {
     showingMenu(!showMenu);
+    // Add dark mode class to body when sidebar is open
     document.body.classList.add("dark-mode");
   };
   return (
@@ -14,28 +20,16 @@ const Layout = () => {
         <ul className="sidebar">
           <li onClick={toggleSideBar}>
             <a href="#">
-              <img src="src/assets/close.svg" alt="close" />
+              <img src={closeX} alt="close" />
             </a>
           </li>
           <hr />
           <li>
-            <a href="/">Blog</a>
+            <a href="/faq">FAQ</a>
           </li>
           <hr />
           <li>
-            <a href="/">Products</a>
-          </li>
-          <hr />
-          <li>
-            <a href="/">About</a>
-          </li>
-          <hr />
-          <li>
-            <a href="/">Forum</a>
-          </li>
-          <hr />
-          <li>
-            <a href="/">Policy</a>
+            <a href="/privacy">Policy</a>
           </li>
           <hr />
         </ul>
@@ -44,27 +38,19 @@ const Layout = () => {
       <ul>
         <li>
           <a href="/">
-            <img src="src/assets/logo.png" alt="logo" />
+            <img src={logo} alt="logo" className="logo-nav" />
           </a>
         </li>
         <li className="hideOnMobile">
-          <a href="/">Blog</a>
+          <a href="/faq">FAQ</a>
         </li>
         <li className="hideOnMobile">
-          <a href="/">Products</a>
+          <a href="/privacy">Policy</a>
         </li>
-        <li className="hideOnMobile">
-          <a href="/">About</a>
-        </li>
-        <li className="hideOnMobile">
-          <a href="/">Forum</a>
-        </li>
-        <li className="hideOnMobile">
-          <a href="/">Policy</a>
-        </li>
+
         <li className="hideOnComputer" onClick={toggleSideBar}>
           <a href="#">
-            <img src="src/assets/menu.svg" alt="menu" className="menu_img" />
+            <img src={menuIcon} alt="menu" className="menu_img" />
           </a>
         </li>
       </ul>

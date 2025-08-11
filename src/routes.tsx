@@ -1,6 +1,12 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Shop from "./shop.tsx";
-import NavBar from "./NavBar";
+import Shop from "./shop";
+import ItemView from "./itemview";
+import PaymentSuccess from "./paymentsuccess";
+import NavBar from "./navbar";
+import Footer from "./footer";
+import Privacy from "./legal/privacy";
+import Terms from "./legal/terms";
+import FAQ from "./faq";
 
 const routes = () => {
   const Layout = () => {
@@ -8,6 +14,7 @@ const routes = () => {
       <>
         <NavBar />
         <Outlet />
+        <Footer />
       </>
     );
   };
@@ -19,6 +26,26 @@ const routes = () => {
         {
           path: "/",
           element: <Shop />,
+        },
+        {
+          path: "/item/:id",
+          element: <ItemView />,
+        },
+        {
+          path: "/paymentsuccess",
+          element: <PaymentSuccess />,
+        },
+        {
+          path: "/privacy",
+          element: <Privacy />,
+        },
+        {
+          path: "/terms",
+          element: <Terms />,
+        },
+        {
+          path: "/faq",
+          element: <FAQ />,
         },
       ],
     },
