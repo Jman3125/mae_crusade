@@ -1,4 +1,6 @@
 import { useState } from "react";
+import arrowRight from "../assets/arrow_right.svg";
+import arrowLeft from "../assets/arrow_left.svg";
 
 interface Props {
   itemId: string;
@@ -31,11 +33,7 @@ const ItemCell = ({
       {hasBack && (
         <img
           onClick={() => showingFront(!showFront)}
-          src={
-            showFront
-              ? "src/assets/arrow_right.svg"
-              : "src/assets/arrow_left.svg"
-          }
+          src={showFront ? arrowRight : arrowLeft}
           alt="arrow"
           className={showFront ? "arrow_grid_right" : "arrow_grid_left"}
         />

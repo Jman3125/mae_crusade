@@ -1,6 +1,7 @@
 import "./App.css";
 import ItemGridCell from "./cells/ItemGridCell";
 import { PresetData } from "./Models/PresetData";
+import ComicImage from "./assets/comic-book.jpeg";
 
 const item = () => {
   // Fetch all shirts from PresetData
@@ -10,11 +11,7 @@ const item = () => {
     <div className="shop_main">
       {/* <h1>The Cowboy's Crusade</h1> */}
       <div className="main_content">
-        <img
-          className="comic_img"
-          src="src/assets/comic-book.jpeg"
-          alt="cowboy's crusade"
-        />
+        <img className="comic_img" src={ComicImage} alt="cowboy's crusade" />
 
         <div className="description_buy">
           <div>
