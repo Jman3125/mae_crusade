@@ -1,0 +1,1 @@
+{"root":["./src/faq.tsx","./src/footer.tsx","./src/itemview.tsx","./src/main.tsx","./src/navbar.tsx","./src/paymentsuccess.tsx","./src/routes.tsx","./src/shop.tsx","./src/vite-env.d.ts","./src/models/paylink.ts","./src/models/presetdata.ts","./src/cells/itemgridcell.tsx","./src/legal/privacy.tsx","./src/legal/terms.tsx","./netlify/functions/stripe-webhook.ts"],"version":"5.8.3"}

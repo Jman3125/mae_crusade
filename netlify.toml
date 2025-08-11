@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[dev]
+  # Optional: local dev server config for Netlify CLI
+  command = "npm run dev"
+  port = 5173
