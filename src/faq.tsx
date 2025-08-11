@@ -5,6 +5,7 @@ import minus from "./assets/remove.svg";
 const faq = () => {
   const [showingAnswer1, showAnswer1] = useState(false);
   const [showingAnswer2, showAnswer2] = useState(false);
+  const [showingAnswer3, showAnswer3] = useState(false);
   return (
     <div className="faq-container">
       <h1>Frequently Asked Questions</h1>
@@ -46,6 +47,26 @@ const faq = () => {
             <h3>Answer:</h3>
             <p>
               Yes, MAE Comics has many other comic book series in the works.
+            </p>
+          </div>
+        )}
+      </div>
+
+      <div
+        className="faq-question"
+        onClick={() => showAnswer3(!showingAnswer3)}
+      >
+        <div className="question-arrow">
+          <h2>What Makes MAE Comics different from other publishers?</h2>
+          <img src={showingAnswer3 ? minus : plus} alt="drop-down" />
+        </div>
+
+        {showingAnswer2 && (
+          <div>
+            <h3>Answer:</h3>
+            <p>
+              We differentiate oursevles by telling original stories that have
+              bold twists and real stakes for the characters in them.
             </p>
           </div>
         )}
