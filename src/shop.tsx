@@ -1,6 +1,6 @@
 import "./App.css";
-import ItemGridCell from "./cells/ItemGridCell";
-import { PresetData } from "./Models/PresetData";
+import ItemGridCell from "./cells/ItemGridCell.tsx";
+import { PresetData } from "./Models/PresetData.ts";
 
 const item = () => {
   // Fetch all shirts from PresetData

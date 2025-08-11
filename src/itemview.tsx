@@ -1,4 +1,4 @@
-import { PresetData } from "./Models/PresetData";
+import { PresetData } from "./Models/PresetData.ts";
 import "./App.css";
 import { useState } from "react";
 import arrowLeft from "./assets/arrow_left.svg";
@@ -6,7 +6,7 @@ import arrowRight from "./assets/arrow_right.svg";
 import closedCircle from "./assets/closed_circle.svg";
 import openCircle from "./assets/open_circle.svg";
 import { useNavigate } from "react-router-dom";
-import { GetPaymentLink } from "./Models/PayLink";
+import { GetPaymentLink } from "./Models/PayLink.ts";
 import infoIcon from "./assets/info.svg";
 
 const ItemView = () => {
