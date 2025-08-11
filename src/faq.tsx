@@ -61,7 +61,7 @@ const faq = () => {
           <img src={showingAnswer3 ? minus : plus} alt="drop-down" />
         </div>
 
-        {showingAnswer2 && (
+        {showingAnswer3 && (
           <div>
             <h3>Answer:</h3>
             <p>
