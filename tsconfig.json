@@ -13,7 +13,7 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "noEmit": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": false
   },
   "include": ["src", "netlify/functions"],  
   "exclude": ["dist", "node_modules"]

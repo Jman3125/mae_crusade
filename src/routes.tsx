@@ -1,12 +1,12 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Shop from "./shop.tsx";
-import ItemView from "./itemview.tsx";
-import PaymentSuccess from "./paymentsuccess.tsx";
-import NavBar from "./navbar.tsx";
-import Footer from "./footer.tsx";
-import Privacy from "./legal/privacy.tsx";
-import Terms from "./legal/terms.tsx";
-import FAQ from "./faq.tsx";
+import Shop from "./shop";
+import ItemView from "./itemview";
+import PaymentSuccess from "./paymentsuccess";
+import NavBar from "./navbar";
+import Footer from "./footer";
+import Privacy from "./legal/privacy";
+import Terms from "./legal/terms";
+import FAQ from "./faq";
 
 const routes = () => {
   const Layout = () => {
