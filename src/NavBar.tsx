@@ -1,10 +1,9 @@
-import "./App.css";
 import { useState } from "react";
 import logo from "./assets/logo.png";
 import closeX from "./assets/close.svg";
 import menuIcon from "./assets/menu.svg";
 
-const navbar = () => {
+const NavBar = () => {
   // State to manage the sidebar visibility
   const [showMenu, showingMenu] = useState(false);
   // Function to toggle the sidebar
@@ -58,4 +57,4 @@ const navbar = () => {
   );
 };
 
-export default navbar;
+export default NavBar;

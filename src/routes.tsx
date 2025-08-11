@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Shop from "./shop";
 import ItemView from "./itemview";
 import PaymentSuccess from "./paymentsuccess";
-import NavBar from "./navbar";
+import NavBar from "./NavBar";
 import Footer from "./footer";
 import Privacy from "./legal/privacy";
 import Terms from "./legal/terms";
