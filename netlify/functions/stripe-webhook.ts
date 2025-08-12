@@ -1,37 +1,34 @@
 import type { Handler } from '@netlify/functions';
 import Stripe from 'stripe';
-import axios from 'axios';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 
-// Map Stripe product IDs → Printful variant IDs
+// Strictly store variant IDs as strings
 const productMap: Record<string, string> = {
   // The Cowboys Crusade Tee
-  'prod_SomrIFmfWMjGHo': '688c08d56887d1', // Shirt 1 Small
-  'prod_SomwOja5vLCUah': '688c08d5688841', // Shirt 1 Medium
-  'prod_Son0d4SLLNgl74': '688c08d5688891', // Shirt 1 Large
-  'prod_Son2nERugaFdfe': '688c08d56888d2', // Shirt 1 XL
+  'prod_SomrIFmfWMjGHo': '688c08d56887d1',
+  'prod_SomwOja5vLCUah': '688c08d5688841',
+  'prod_Son0d4SLLNgl74': '688c08d5688891',
+  'prod_Son2nERugaFdfe': '688c08d56888d2',
 
   // MAE Comics Tee
-  'prod_Son7EN2AZ6wBba': '68917090903d61', // Shirt 2 Small
-  'prod_Son7HiaDq9AimI': '68917090903e02', // Shirt 2 Medium
-  'prod_Son96RNGbuBlMY': '68917090903e97', // Shirt 2 Large
-  'prod_SonA2RYcRR16nO': '68917090903f27', // Shirt 2 XL
+  'prod_Son7EN2AZ6wBba': '68917090903d61',
+  'prod_Son7HiaDq9AimI': '68917090903e02',
+  'prod_Son96RNGbuBlMY': '68917090903e97',
+  'prod_SonA2RYcRR16nO': '68917090903f27',
 
   // Poster
-  'prod_Som2h52y4Nm1k7': '68916703288a79', // Poster
+  'prod_Som2h52y4Nm1k7': '68916703288a79',
 };
 
-// Printful API URL
 const PRINTFUL_API_URL = 'https://api.printful.com/orders';
 
-// Webhook handler
-const handler: Handler = async (event) => {
+export const handler: Handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
-  
+
   const sig = event.headers['stripe-signature'] as string;
   let stripeEvent;
 
@@ -49,11 +46,10 @@ const handler: Handler = async (event) => {
   if (stripeEvent.type === 'checkout.session.completed') {
     const session = stripeEvent.data.object as Stripe.Checkout.Session;
 
-    // Fetch line items
     const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
 
     for (const item of lineItems.data) {
-      const productId = item.price?.product as string;
+      const productId = String(item.price?.product); // Ensure string type
       const variantId = productMap[productId];
 
       if (!variantId) {
@@ -61,20 +57,20 @@ const handler: Handler = async (event) => {
         continue;
       }
 
-      // Create order in Printful
+      // Build Printful order without altering IDs
       const printfulOrder = {
         recipient: {
-          name: session.customer_details?.name,
-          address1: session.customer_details?.address?.line1,
-          city: session.customer_details?.address?.city,
-          state_code: session.customer_details?.address?.state,
-          country_code: session.customer_details?.address?.country,
-          zip: session.customer_details?.address?.postal_code,
-          email: session.customer_details?.email,
+          name: session.customer_details?.name || '',
+          address1: session.customer_details?.address?.line1 || '',
+          city: session.customer_details?.address?.city || '',
+          state_code: session.customer_details?.address?.state || '',
+          country_code: session.customer_details?.address?.country || '',
+          zip: session.customer_details?.address?.postal_code || '',
+          email: session.customer_details?.email || '',
         },
         items: [
           {
-            variant_id: variantId,
+            variant_id: variantId, // stays string
             quantity: item.quantity || 1,
           },
         ],
@@ -91,7 +87,7 @@ const handler: Handler = async (event) => {
         });
 
         const data = await res.json();
-        console.log('Printful order response:', data);
+        console.log('Printful order response:', JSON.stringify(data, null, 2));
       } catch (err) {
         console.error('Error creating Printful order:', err);
       }
@@ -100,5 +96,3 @@ const handler: Handler = async (event) => {
 
   return { statusCode: 200, body: 'Webhook processed' };
 };
-
-export { handler };
