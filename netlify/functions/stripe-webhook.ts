@@ -70,7 +70,7 @@ export const handler: Handler = async (event) => {
         },
         items: [
           {
-            variant_id: variantId, // stays string
+            variant_id: String(variantId), // stays string
             quantity: item.quantity || 1,
           },
         ],
