@@ -25,14 +25,20 @@ const item = () => {
               to miss the start. <a href="/faq">More Info</a>
             </span>
           </div>
-          <button
-            onClick={() =>
-              (window.location.href =
-                "https://buy.stripe.com/4gM9AMgaCgT5062aIQ77O00")
-            }
-          >
-            {"$5 - "}Buy Now
-          </button>
+          <div className="button-policy">
+            <button
+              onClick={() =>
+                (window.location.href =
+                  "https://buy.stripe.com/4gM9AMgaCgT5062aIQ77O00")
+              }
+            >
+              {"$5 - "}Buy Now
+            </button>
+            <p>
+              By continuing to purchase you agree to our{" "}
+              <a href="/terms">Terms</a> and <a href="/policy">Conditions</a>
+            </p>
+          </div>
         </div>
       </div>
 

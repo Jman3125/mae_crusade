@@ -27,7 +27,7 @@ const footer = () => {
             <h3>Other</h3>
             <span>
               <img src={instagramIcon} alt="" />
-              <a href="instagram.com/mae_crusade">Instagram</a>
+              <a href="https://www.instagram.com/maecomic/">Instagram</a>
             </span>
             <span>
               <img src={emailIcon} alt="" />

@@ -116,11 +116,15 @@ const privacy = () => {
       <div>
         <h2>No Additional Data Collection</h2>
         <p>
-          You asked that we do not collect data beyond what Stripe and Printful
-          handle. Accordingly, we will not collect additional personal data for
-          analytics, profiling, or marketing unless you explicitly opt in and
-          provide that data (for example, by subscribing or emailing us
-          directly).
+          We do not collect personal data beyond what Stripe and Printful handle
+          during your purchase. However, for orders of The Cowboy’s Crusade
+          comic book, information you provide to Stripe at checkout — including
+          your name, shipping address, and email — will be securely accessed by
+          MAE Comics in order to ship your comic directly to you. This process
+          is separate from Printful’s fulfillment. We will not collect
+          additional personal data for analytics, profiling, or marketing unless
+          you explicitly opt in and provide it (for example, by subscribing or
+          emailing us directly).
         </p>
       </div>
       <div>
