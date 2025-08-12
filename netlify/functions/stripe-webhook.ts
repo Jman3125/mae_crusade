@@ -18,7 +18,7 @@ const productMap: Record<string, string> = {
   'prod_SonA2RYcRR16nO': '68917090903f27',
 
   // Poster
-  'prod_Som2h52y4Nm1k7': '68916703288a79',
+  'prod_Son4miH1NsEduL': '68916703288a79',
 };
 
 const PRINTFUL_API_URL = 'https://api.printful.com/orders';
