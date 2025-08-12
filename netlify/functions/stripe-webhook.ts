@@ -3,7 +3,6 @@ import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
-
 // Strictly store variant IDs as strings
 const productMap: Record<string, string> = {
   // The Cowboys Crusade Tee
@@ -23,6 +22,12 @@ const productMap: Record<string, string> = {
 };
 
 const PRINTFUL_API_URL = 'https://api.printful.com/orders';
+
+// Optional: define a type for clarity and safety
+type PrintfulOrderItem = {
+  variant_id: string;
+  quantity: number;
+};
 
 export const handler: Handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -45,19 +50,18 @@ export const handler: Handler = async (event) => {
 
   if (stripeEvent.type === 'checkout.session.completed') {
     const session = stripeEvent.data.object as Stripe.Checkout.Session;
-
     const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
 
     for (const item of lineItems.data) {
       const productId = String(item.price?.product); // Ensure string type
-      const variantId = productMap[productId];
+      const variantId: string = productMap[productId];
 
       if (!variantId) {
         console.error(`No variant ID found for product ${productId}`);
         continue;
       }
 
-      // Build Printful order without altering IDs
+      // Build Printful order with enforced string type
       const printfulOrder = {
         recipient: {
           name: session.customer_details?.name || '',
@@ -69,12 +73,16 @@ export const handler: Handler = async (event) => {
           email: session.customer_details?.email || '',
         },
         items: [
-          {
-            variant_id: String(variantId), // stays string
+          <PrintfulOrderItem>{
+            variant_id: `${variantId}`, // Template literal ensures string
             quantity: item.quantity || 1,
           },
         ],
       };
+
+      // Log final JSON to verify string formatting
+      const body = JSON.stringify(printfulOrder);
+      console.log('Sending to Printful:', body);
 
       try {
         const res = await fetch(PRINTFUL_API_URL, {
@@ -83,7 +91,7 @@ export const handler: Handler = async (event) => {
             'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(printfulOrder),
+          body,
         });
 
         const data = await res.json();
