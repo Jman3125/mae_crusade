@@ -72,7 +72,7 @@ const handler: Handler = async (event) => {
         },
         items: [
           {
-            sync_variant_id: syncVariantId,
+            sync_variant_id: Number(syncVariantId), //Convert it to a number when sending? It only breaks in this file
             quantity: item.quantity || 1,
           },
         ],
