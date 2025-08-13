@@ -53,24 +53,15 @@ const handler: Handler = async (event) => {
     for (const item of lineItems.data) {
       const productId = item.price?.product as string;
       const syncVariantId = productMap[productId];
-      let finalId: number;
-
-      try {
-        const bigIntId = BigInt(`0x${syncVariantId}`);
-        finalId = Number(bigIntId); 
-        if (!Number.isSafeInteger(finalId)) {
-          throw new Error(`sync_variant_id ${syncVariantId} exceeds safe integer range`);
-        }
-      } catch (err) {
-        console.error(`Failed to convert sync_variant_id: ${syncVariantId}`, err);
-        continue;
-      }
 
 
       if (!syncVariantId) {
         console.error(`No variant ID found for product ${productId}`);
         continue;
       }
+
+      const bigIntId = BigInt(`0x${syncVariantId}`);
+
 
       // Create order in Printful
       const printfulOrder = {
@@ -85,11 +76,19 @@ const handler: Handler = async (event) => {
         },
         items: [
           {
-            sync_variant_id: finalId, 
+            sync_variant_id: bigIntId, 
             quantity: item.quantity || 1,
           },
         ],
       };
+
+      // Custom replacer to stringify BigInt as a string
+      const rawJson = JSON.stringify(printfulOrder, (_, value) =>
+        typeof value === 'bigint' ? value.toString() : value
+      );
+
+      // Post-process to remove quotes around BigInt values
+      const sanitizedJson = rawJson.replace(/"(\d{15,})"/g, '$1'); // removes quotes from long numbers
 
       try {
         const res = await fetch(PRINTFUL_API_URL, {
@@ -98,7 +97,7 @@ const handler: Handler = async (event) => {
             'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(printfulOrder),
+          body: sanitizedJson,
         });
 
         const data = await res.json();
