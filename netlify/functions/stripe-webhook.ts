@@ -53,20 +53,16 @@ const handler: Handler = async (event) => {
     for (const item of lineItems.data) {
       const productId = item.price?.product as string;
       const syncVariantId = productMap[productId];
-      let finalId: string | number;
+      let finalId: number;
 
-      if (/^[0-9]+$/.test(syncVariantId)) {
-        // Purely numeric — safe to send as number
-        finalId = Number(syncVariantId);
-      } else if (/^[0-9a-f]+$/i.test(syncVariantId)) {
-        // Hex string — convert to decimal
-        finalId = parseInt(syncVariantId, 16);
-        if (finalId > Number.MAX_SAFE_INTEGER) {
-          console.warn(`sync_variant_id ${syncVariantId} exceeds safe integer range`);
-          finalId = syncVariantId; // fallback to string
+      try {
+        const bigIntId = BigInt(`0x${syncVariantId}`);
+        finalId = Number(bigIntId); 
+        if (!Number.isSafeInteger(finalId)) {
+          throw new Error(`sync_variant_id ${syncVariantId} exceeds safe integer range`);
         }
-      } else {
-        console.error(`Invalid sync_variant_id format: ${syncVariantId}`);
+      } catch (err) {
+        console.error(`Failed to convert sync_variant_id: ${syncVariantId}`, err);
         continue;
       }
 
