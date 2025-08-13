@@ -87,6 +87,7 @@ const handler: Handler = async (event) => {
       );
 
       try {
+        console.log('Sending to Printful:', rawJson);
         const res = await fetch(PRINTFUL_API_URL, {
             method: 'POST',
             headers: {
@@ -97,7 +98,9 @@ const handler: Handler = async (event) => {
           });
 
         const data = await res.json();
-        console.log('Printful order response:', data);
+        console.log('Printful response status:', res.status);
+      console.log('Printful response body:', data);
+
       } catch (err) {
         console.error('Error creating Printful order:', err);
       }
