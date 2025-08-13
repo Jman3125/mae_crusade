@@ -60,8 +60,7 @@ const handler: Handler = async (event) => {
         continue;
       }
 
-      const bigIntId = BigInt(`${syncVariantId}`);
-
+      const bigIntId = BigInt(`0x${syncVariantId}`);
 
       // Create order in Printful
       const printfulOrder = {
