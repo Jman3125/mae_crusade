@@ -14,8 +14,8 @@ const productMap: Record<string, string> = {
 
   // MAE Comics Tee
   'prod_Son7EN2AZ6wBba': '68917090903d61',
-  'prod_Son7HiaDq9AimI': '68917090903e02',
-  'prod_Son96RNGbuBlMY': '68917090903e97',
+  'prod_Son7HiaDq9AimI': '689bfb50543ea8',
+  'prod_Son96RNGbuBlMY': '689bfb50543f73',
   'prod_SonA2RYcRR16nO': '68917090903f27',
 
   // Poster
