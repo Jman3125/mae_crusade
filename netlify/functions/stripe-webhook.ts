@@ -5,6 +5,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 // Strictly store variant IDs as strings
 const productMap: Record<string, string> = {
+
   // The Cowboys Crusade Tee
   'prod_SomrIFmfWMjGHo': '688c08d56887d1',
   'prod_SomwOja5vLCUah': '688c08d5688841',
@@ -20,16 +21,11 @@ const productMap: Record<string, string> = {
   // Poster
   'prod_Son4miH1NsEduL': '68916703288a79',
 };
-
+// Printful API URL
 const PRINTFUL_API_URL = 'https://api.printful.com/orders';
 
-// Optional: define a type for clarity and safety
-type PrintfulOrderItem = {
-  variant_id: string;
-  quantity: number;
-};
-
-export const handler: Handler = async (event) => {
+// Webhook handler
+const handler: Handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
@@ -50,39 +46,37 @@ export const handler: Handler = async (event) => {
 
   if (stripeEvent.type === 'checkout.session.completed') {
     const session = stripeEvent.data.object as Stripe.Checkout.Session;
+
+    // Fetch line items
     const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
 
     for (const item of lineItems.data) {
-      const productId = String(item.price?.product); // Ensure string type
-      const variantId: string = productMap[productId];
+      const productId = item.price?.product as string;
+      const syncVariantId = productMap[productId];
 
-      if (!variantId) {
+      if (!syncVariantId) {
         console.error(`No variant ID found for product ${productId}`);
         continue;
       }
 
-      // Build Printful order with enforced string type
+      // Create order in Printful
       const printfulOrder = {
         recipient: {
-          name: session.customer_details?.name || '',
-          address1: session.customer_details?.address?.line1 || '',
-          city: session.customer_details?.address?.city || '',
-          state_code: session.customer_details?.address?.state || '',
-          country_code: session.customer_details?.address?.country || '',
-          zip: session.customer_details?.address?.postal_code || '',
-          email: session.customer_details?.email || '',
+          name: session.customer_details?.name,
+          address1: session.customer_details?.address?.line1,
+          city: session.customer_details?.address?.city,
+          state_code: session.customer_details?.address?.state,
+          country_code: session.customer_details?.address?.country,
+          zip: session.customer_details?.address?.postal_code,
+          email: session.customer_details?.email,
         },
         items: [
-          <PrintfulOrderItem>{
-            variant_id: `${variantId}`, // Template literal ensures string
+          {
+            sync_variant_id: syncVariantId,
             quantity: item.quantity || 1,
           },
         ],
       };
-
-      // Log final JSON to verify string formatting
-      const body = JSON.stringify(printfulOrder);
-      console.log('Sending to Printful:', body);
 
       try {
         const res = await fetch(PRINTFUL_API_URL, {
@@ -91,11 +85,11 @@ export const handler: Handler = async (event) => {
             'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
             'Content-Type': 'application/json',
           },
-          body,
+          body: JSON.stringify(printfulOrder),
         });
 
         const data = await res.json();
-        console.log('Printful order response:', JSON.stringify(data, null, 2));
+        console.log('Printful order response:', data);
       } catch (err) {
         console.error('Error creating Printful order:', err);
       }
@@ -104,3 +98,5 @@ export const handler: Handler = async (event) => {
 
   return { statusCode: 200, body: 'Webhook processed' };
 };
+
+export { handler };
