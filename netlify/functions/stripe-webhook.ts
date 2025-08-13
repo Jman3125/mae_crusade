@@ -61,6 +61,7 @@ const handler: Handler = async (event) => {
       }
 
       const bigIntId = BigInt(`0x${syncVariantId}`);
+      console.log(`Converted sync_variant_id for ${productId}:`, bigIntId.toString());
 
       // Create order in Printful
       const printfulOrder = {
@@ -94,7 +95,7 @@ const handler: Handler = async (event) => {
               'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
               'Content-Type': 'application/json',
             },
-            body: rawJson, 
+            body: rawJson.replace(/"(\d{15,})"/g, '$1')
           });
 
         const data = await res.json();
