@@ -61,7 +61,7 @@ const handler: Handler = async (event) => {
         continue;
       }
 
-      const syncVariantId = BigInt(`0x${syncVariantHex}`);
+      const syncVariantId = BigInt(syncVariantHex);
       console.log(`Converted sync_variant_id for ${productId}:`, syncVariantId.toString());
 
 
@@ -85,14 +85,9 @@ const handler: Handler = async (event) => {
           },
         ],
       };
-      // Serialize BigInt safely and strip quotes from long numbers
-      const rawJson = JSON.stringify(printfulOrder, (_, value) =>
-        typeof value === 'bigint' ? value.toString() : value
-      );
-      const sanitizedJson = rawJson.replace(/"(\d{15,})"/g, '$1');
 
-      try {
-        console.log('Sending to Printful:', sanitizedJson);
+     try {
+        console.log('Sending to Printful:', JSON.stringify(printfulOrder, null, 2));
 
         const res = await fetch(PRINTFUL_API_URL, {
           method: 'POST',
@@ -100,7 +95,7 @@ const handler: Handler = async (event) => {
             'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
             'Content-Type': 'application/json',
           },
-          body: sanitizedJson,
+          body: JSON.stringify(printfulOrder),
         });
 
         const data = await res.json();
