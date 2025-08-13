@@ -53,6 +53,23 @@ const handler: Handler = async (event) => {
     for (const item of lineItems.data) {
       const productId = item.price?.product as string;
       const syncVariantId = productMap[productId];
+      let finalId: string | number;
+
+      if (/^[0-9]+$/.test(syncVariantId)) {
+        // Purely numeric — safe to send as number
+        finalId = Number(syncVariantId);
+      } else if (/^[0-9a-f]+$/i.test(syncVariantId)) {
+        // Hex string — convert to decimal
+        finalId = parseInt(syncVariantId, 16);
+        if (finalId > Number.MAX_SAFE_INTEGER) {
+          console.warn(`sync_variant_id ${syncVariantId} exceeds safe integer range`);
+          finalId = syncVariantId; // fallback to string
+        }
+      } else {
+        console.error(`Invalid sync_variant_id format: ${syncVariantId}`);
+        continue;
+      }
+
 
       if (!syncVariantId) {
         console.error(`No variant ID found for product ${productId}`);
@@ -72,7 +89,7 @@ const handler: Handler = async (event) => {
         },
         items: [
           {
-            sync_variant_id: Number(syncVariantId), //Convert it to a number when sending? It only breaks in this file
+            sync_variant_id: finalId, 
             quantity: item.quantity || 1,
           },
         ],
