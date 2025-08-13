@@ -4,22 +4,23 @@ import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 // Strictly store variant IDs as strings
-const productMap: Record<string, string> = {
+const productMap: Record<string, number> = {
 
-  // The Cowboys Crusade Tee
-  'prod_SomrIFmfWMjGHo': '688c08d56887d1',
-  'prod_SomwOja5vLCUah': '688c08d5688841',
-  'prod_Son0d4SLLNgl74': '688c08d5688891',
-  'prod_Son2nERugaFdfe': '688c08d56888d2',
+// The Cowboys Crusade Tee
+'prod_SomrIFmfWMjGHo': 11805916207196343249, // 688c08d56887d1
+'prod_SomwOja5vLCUah': 11805916207196343361, // 688c08d5688841
+'prod_Son0d4SLLNgl74': 11805916207196343441, // 688c08d5688891
+'prod_Son2nERugaFdfe': 11805916207196343506, // 688c08d56888d2
 
-  // MAE Comics Tee
-  'prod_Son7EN2AZ6wBba': '68917090903d61',
-  'prod_Son7HiaDq9AimI': '689bfb50543ea8',
-  'prod_Son96RNGbuBlMY': '689bfb50543f73',
-  'prod_SonA2RYcRR16nO': '68917090903f27',
+// MAE Comics Tee
+'prod_Son7EN2AZ6wBba': 11805916207226727137, // 68917090903d61
+'prod_Son7HiaDq9AimI': 11805916207226727336, // 689bfb50543ea8
+'prod_Son96RNGbuBlMY': 11805916207226727475, // 689bfb50543f73
+'prod_SonA2RYcRR16nO': 11805916207226727191, // 68917090903f27
 
-  // Poster
-  'prod_Son4miH1NsEduL': '68916703288a79',
+// Poster
+'prod_Son4miH1NsEduL': 11805916207226727097, // 68916703288a79
+
 };
 // Printful API URL
 const PRINTFUL_API_URL = 'https://api.printful.com/orders';
@@ -60,8 +61,6 @@ const handler: Handler = async (event) => {
         continue;
       }
 
-      const bigIntId = BigInt(`0x${syncVariantId}`);
-      console.log(`Converted sync_variant_id for ${productId}:`, bigIntId.toString());
 
       // Create order in Printful
       const printfulOrder = {
@@ -76,35 +75,32 @@ const handler: Handler = async (event) => {
         },
         items: [
           {
-            sync_variant_id: bigIntId, 
+            sync_variant_id: syncVariantId, 
             quantity: item.quantity || 1,
           },
         ],
       };
 
-      // Custom replacer to stringify BigInt as a string
-      const rawJson = JSON.stringify(printfulOrder, (_, value) =>
-        typeof value === 'bigint' ? value.toString() : value
-      );
 
       try {
-        console.log('Sending to Printful:', rawJson);
+        console.log('Sending to Printful:', JSON.stringify(printfulOrder, null, 2));
+
         const res = await fetch(PRINTFUL_API_URL, {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
-              'Content-Type': 'application/json',
-            },
-            body: rawJson.replace(/"(\d{15,})"/g, '$1')
-          });
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(printfulOrder),
+        });
 
         const data = await res.json();
         console.log('Printful response status:', res.status);
-      console.log('Printful response body:', data);
-
+        console.log('Printful response body:', data);
       } catch (err) {
         console.error('Error creating Printful order:', err);
       }
+
     }
   }
 
