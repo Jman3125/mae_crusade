@@ -60,7 +60,7 @@ const handler: Handler = async (event) => {
         continue;
       }
 
-      const bigIntId = BigInt(`0x${syncVariantId}`);
+      const bigIntId = BigInt(`${syncVariantId}`);
 
 
       // Create order in Printful
@@ -87,18 +87,15 @@ const handler: Handler = async (event) => {
         typeof value === 'bigint' ? value.toString() : value
       );
 
-      // Post-process to remove quotes around BigInt values
-      const sanitizedJson = rawJson.replace(/"(\d{15,})"/g, '$1'); // removes quotes from long numbers
-
       try {
         const res = await fetch(PRINTFUL_API_URL, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
-            'Content-Type': 'application/json',
-          },
-          body: sanitizedJson,
-        });
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
+              'Content-Type': 'application/json',
+            },
+            body: rawJson, 
+          });
 
         const data = await res.json();
         console.log('Printful order response:', data);
