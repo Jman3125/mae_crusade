@@ -7,19 +7,19 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 const productMap: Record<string, number> = {
 
 // The Cowboys Crusade Tee
-'prod_SomrIFmfWMjGHo': 11805916207196343249, // 688c08d56887d1
-'prod_SomwOja5vLCUah': 11805916207196343361, // 688c08d5688841
-'prod_Son0d4SLLNgl74': 11805916207196343441, // 688c08d5688891
-'prod_Son2nERugaFdfe': 11805916207196343506, // 688c08d56888d2
+'prod_SomrIFmfWMjGHo': 29427367145932753, // 688c08d56887d1
+'prod_SomwOja5vLCUah': 29427367145932865, // 688c08d5688841
+'prod_Son0d4SLLNgl74': 29427367145932945, // 688c08d5688891
+'prod_Son2nERugaFdfe': 29427367145933010, // 688c08d56888d2
 
 // MAE Comics Tee
-'prod_Son7EN2AZ6wBba': 11805916207226727137, // 68917090903d61
-'prod_Son7HiaDq9AimI': 11805916207226727336, // 689bfb50543ea8
-'prod_Son96RNGbuBlMY': 11805916207226727475, // 689bfb50543f73
-'prod_SonA2RYcRR16nO': 11805916207226727191, // 68917090903f27
+'prod_Son7EN2AZ6wBba': 29433310225644897, // 68917090903d61
+'prod_Son7HiaDq9AimI': 29444901264703144, // 689bfb50543ea8
+'prod_Son96RNGbuBlMY': 29444901264703347, // 689bfb50543f73
+'prod_SonA2RYcRR16nO': 29433310225645351, // 68917090903f27
 
 // Poster
-'prod_Son4miH1NsEduL': 11805916207226727097, // 68916703288a79
+'prod_Son4miH1NsEduL': 29433269198555769, // 68916703288a79
 
 };
 // Printful API URL
@@ -60,7 +60,7 @@ const handler: Handler = async (event) => {
         console.error(`No variant ID found for product ${productId}`);
         continue;
       }
-
+      
 
       // Create order in Printful
       const printfulOrder = {
@@ -82,24 +82,24 @@ const handler: Handler = async (event) => {
       };
 
 
-      try {
-        console.log('Sending to Printful:', JSON.stringify(printfulOrder, null, 2));
+    try {
+      console.log('Sending to Printful:', JSON.stringify(printfulOrder, null, 2));
 
-        const res = await fetch(PRINTFUL_API_URL, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(printfulOrder),
-        });
+      const res = await fetch(PRINTFUL_API_URL, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(printfulOrder),
+      });
 
-        const data = await res.json();
-        console.log('Printful response status:', res.status);
-        console.log('Printful response body:', data);
-      } catch (err) {
-        console.error('Error creating Printful order:', err);
-      }
+      const data = await res.json();
+      console.log('Printful response status:', res.status);
+      console.log('Printful response body:', data);
+    } catch (err) {
+      console.error('Error creating Printful order:', err);
+    }
 
     }
   }
