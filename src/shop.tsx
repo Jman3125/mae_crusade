@@ -18,11 +18,12 @@ const item = () => {
             <h2>About</h2>
             <span>
               In a futuristic society built upon the idea of survival of the
-              fittest, the world is run by champions. Divided into three
-              categories; guns, material arts, and sword. A lone Cowboy sets out
-              on a mysterious quest. Filled with action, mystery, and fun; the
-              story of The Cowboy’s Crusade is only beginning and you won’t want
-              to miss the start. <a href="/faq">More Info</a>
+              fittest, the world is run by champions divided into three
+              categories: guns, martial arts, and swords. A lone cowboy sets out
+              on a mysterious quest filled with action, mystery, and fun. The
+              story of 'The Cowboy's Crusade' is only beginning, and you won’t
+              want to miss the start!
+              <a href="/faq">More Info</a>
             </span>
           </div>
           <div className="button-policy">
