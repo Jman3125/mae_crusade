@@ -4,22 +4,22 @@ import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 // Strictly store variant IDs as strings
-const productMap: Record<string, number> = {
+const productMap: Record<string, string> = {
 
 // The Cowboys Crusade Tee
-'prod_SomrIFmfWMjGHo': 29427367145932753, // 688c08d56887d1
-'prod_SomwOja5vLCUah': 29427367145932865, // 688c08d5688841
-'prod_Son0d4SLLNgl74': 29427367145932945, // 688c08d5688891
-'prod_Son2nERugaFdfe': 29427367145933010, // 688c08d56888d2
+'prod_SomrIFmfWMjGHo': "688c08d56887d1", // 688c08d56887d1
+'prod_SomwOja5vLCUah': "688c08d5688841", // 688c08d5688841
+'prod_Son0d4SLLNgl74': "688c08d5688891", // 688c08d5688891
+'prod_Son2nERugaFdfe': "688c08d56888d2", // 688c08d56888d2
 
 // MAE Comics Tee
-'prod_Son7EN2AZ6wBba': 29433310225644897, // 68917090903d61
-'prod_Son7HiaDq9AimI': 29444901264703144, // 689bfb50543ea8
-'prod_Son96RNGbuBlMY': 29444901264703347, // 689bfb50543f73
-'prod_SonA2RYcRR16nO': 29433310225645351, // 68917090903f27
+'prod_Son7EN2AZ6wBba': "68917090903d61", // 68917090903d61
+'prod_Son7HiaDq9AimI': "689bfb50543ea8", // 689bfb50543ea8
+'prod_Son96RNGbuBlMY': "689bfb50543f73", // 689bfb50543f73
+'prod_SonA2RYcRR16nO': "68917090903f27", // 68917090903f27
 
 // Poster
-'prod_Son4miH1NsEduL': 29433269198555769, // 68916703288a79
+'prod_Son4miH1NsEduL': "68916703288a79", // 68916703288a79
 
 };
 // Printful API URL
@@ -53,17 +53,13 @@ const handler: Handler = async (event) => {
 
     for (const item of lineItems.data) {
       const productId = item.price?.product as string;
-      const syncVariantHex = productMap[productId];
+      const externalId = productMap[productId];
 
 
-      if (!syncVariantHex) {
-        console.error(`No variant ID found for product ${productId}`);
+      if (!externalId) {
+        console.error(`No external ID found for product ${productId}`);
         continue;
       }
-
-      const syncVariantId = BigInt(syncVariantHex);
-      console.log(`Converted sync_variant_id for ${productId}:`, syncVariantId.toString());
-
 
 
 
@@ -80,7 +76,7 @@ const handler: Handler = async (event) => {
         },
         items: [
           {
-            sync_variant_id: syncVariantId, 
+            external_id: externalId, 
             quantity: item.quantity || 1,
           },
         ],
