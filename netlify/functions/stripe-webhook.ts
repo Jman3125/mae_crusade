@@ -76,7 +76,7 @@ const handler: Handler = async (event) => {
         },
         items: [
           {
-            external_id: externalId, 
+            external_variant_id: externalId, 
             quantity: item.quantity || 1,
           },
         ],
