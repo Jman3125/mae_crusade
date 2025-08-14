@@ -65,6 +65,7 @@ const handler: Handler = async (event) => {
 
       // Create order in Printful
       const printfulOrder = {
+        confirm: true,
         recipient: {
           name: session.customer_details?.name,
           address1: session.customer_details?.address?.line1,
