@@ -4,23 +4,22 @@ import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 // Strictly store variant IDs as strings
-const productMap: Record<string, string> = {
+const productMap: Record<string, number> = {
 
-// The Cowboys Crusade Tee
-'prod_SomrIFmfWMjGHo': "688c08d56887d1", // 688c08d56887d1
-'prod_SomwOja5vLCUah': "688c08d5688841", // 688c08d5688841
-'prod_Son0d4SLLNgl74': "688c08d5688891", // 688c08d5688891
-'prod_Son2nERugaFdfe': "688c08d56888d2", // 688c08d56888d2
+ // Cowboys Crusade Tee
+  'prod_SomrIFmfWMjGHo': 4907788418, // S
+  'prod_SomwOja5vLCUah': 4907788419, // M
+  'prod_Son0d4SLLNgl74': 4907788420, // L
+  'prod_Son2nERugaFdfe': 4907788421, // XL
 
-// MAE Comics Tee
-'prod_Son7EN2AZ6wBba': "68917090903d61", // 68917090903d61
-'prod_Son7HiaDq9AimI': "689bfb50543ea8", // 689bfb50543ea8
-'prod_Son96RNGbuBlMY': "689bfb50543f73", // 689bfb50543f73
-'prod_SonA2RYcRR16nO': "68917090903f27", // 68917090903f27
+  // MAE Comics Tee
+  'prod_Son7EN2AZ6wBba': 4912751777, // S
+  'prod_Son7HiaDq9AimI': 4922780633, // M
+  'prod_Son96RNGbuBlMY': 4922780634, // L
+  'prod_SonA2RYcRR16nO': 4912751780, // XL
 
-// Poster
-'prod_Son4miH1NsEduL': "68916703288a79", // 68916703288a79
-
+  // Poster
+  'prod_Son4miH1NsEduL': 4912628717,
 };
 // Printful API URL
 const PRINTFUL_API_URL = 'https://api.printful.com/orders';
@@ -53,10 +52,10 @@ const handler: Handler = async (event) => {
 
     for (const item of lineItems.data) {
       const productId = item.price?.product as string;
-      const externalId = productMap[productId];
+      const syncVariantId = productMap[productId];
 
 
-      if (!externalId) {
+      if (!syncVariantId) {
         console.error(`No external ID found for product ${productId}`);
         continue;
       }
@@ -77,7 +76,7 @@ const handler: Handler = async (event) => {
         },
         items: [
           {
-            external_variant_id: externalId, 
+            sync_variant_id: syncVariantId, 
             quantity: item.quantity || 1,
           },
         ],
