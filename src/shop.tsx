@@ -36,7 +36,8 @@ const item = () => {
             </button>
             <p>
               By continuing to purchase you agree to our{" "}
-              <a href="/terms">Terms</a> and <a href="/policy">Conditions</a>
+              <a href="/terms">Terms</a> and{" "}
+              <a href="/privacy">Privacy Policy</a>
             </p>
           </div>
         </div>
