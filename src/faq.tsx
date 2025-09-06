@@ -15,7 +15,9 @@ const faq = () => {
         onClick={() => showAnswer1(!showingAnswer1)}
       >
         <div className="question-arrow">
-          <h2>Is "The Cowboy's Crusade" a one off series?</h2>
+          <h2>
+            Is <i>The Cowboy's Crusade</i> a one off series?
+          </h2>
           <img src={showingAnswer1 ? minus : plus} alt="drop-down" />
         </div>
 
@@ -23,8 +25,8 @@ const faq = () => {
           <div>
             <h3>Answer:</h3>
             <p>
-              No, "The Cowboy's Crusade" plans ot be an ongoing series with new
-              issues as soon as possible.
+              No, <i>The Cowboy's Crusade</i> plans to be an ongoing series with
+              new issues as soon as possible.
             </p>
           </div>
         )}
@@ -36,8 +38,8 @@ const faq = () => {
       >
         <div className="question-arrow">
           <h2>
-            Will MAE Comics publish more series outside of "The Cowboy's
-            Crusade"?
+            Will MAE Comics publish more series outside of{" "}
+            <i>The Cowboy's Crusade</i>?
           </h2>
           <img src={showingAnswer2 ? minus : plus} alt="drop-down" />
         </div>

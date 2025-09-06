@@ -162,7 +162,7 @@ const privacy = () => {
           <a href="mailto:maecomic@gmail.com">maecomic@gmail.com</a>.
         </p>
         <p className="small">
-          Site owner(s): Mason Saunders and Eva Rosade. Site made by Jack
+          Site owners: Mason Saunders and Eva Rosado. Site made by Jack
           Manfredi.
         </p>
       </div>

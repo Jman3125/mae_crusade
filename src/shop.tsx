@@ -1,7 +1,7 @@
 import "./App.css";
 import ItemGridCell from "./cells/ItemGridCell";
 import { PresetData } from "./Models/PresetData";
-import ComicImage from "./assets/comic-book.jpeg";
+import ComicImage from "./assets/comic-book.jpg";
 
 const item = () => {
   // Fetch all shirts from PresetData
@@ -17,12 +17,11 @@ const item = () => {
           <div>
             <h2>About</h2>
             <span>
-              In a futuristic society built upon the idea of survival of the
-              fittest, the world is run by champions divided into three
-              categories: guns, martial arts, and swords. A lone cowboy sets out
-              on a mysterious quest filled with action, mystery, and fun. The
-              story of 'The Cowboy's Crusade' is only beginning, and you won’t
-              want to miss the start! <a href="/faq"> More Info.</a>
+              In a futuristic world built upon the idea of survival of the
+              fittest, the Champions run society. A lone cowboy is on a
+              mysterious quest—until he meets a man who changes everything. The
+              story of <i>The Cowboy's Crusade</i> is only beginning, and you
+              won't want to miss the start! <a href="/faq"> More Info.</a>
             </span>
           </div>
           <div className="button-policy">
