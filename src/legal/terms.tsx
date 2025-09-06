@@ -18,7 +18,7 @@ const terms = () => {
       <div>
         <h2>About MAE Comics</h2>
         <p>
-          MAE Comics is owned by Mason Saunders and Eva Rosade and the Site was
+          MAE Comics is owned by Mason Saunders and Eva Rosado and the Site was
           created by Jack Manfredi. The Site sells physical products including
           the comic book <em>The Cowboy's Crusade</em>, posters, and shirts.
         </p>
@@ -108,7 +108,7 @@ const terms = () => {
         <h2>Indemnification</h2>
         <p>
           You agree to indemnify, defend, and hold harmless MAE Comics, its
-          owners (Mason Saunders and Eva Rosade), and the Site creator (Jack
+          owners (Mason Saunders and Eva Rosado), and the Site creator (Jack
           Manfredi) from any claims, damages, losses, liabilities, and expenses
           (including reasonable attorneys' fees) arising from your breach of
           these Terms or your use of the Site.
@@ -145,7 +145,7 @@ const terms = () => {
           <a href="mailto:maecomic@gmail.com">maecomic@gmail.com</a>.
         </p>
         <p className="small">
-          Site owner(s): Mason Saunders and Eva Rosade. Site made by Jack
+          Site owners: Mason Saunders and Eva Rosado. Site made by Jack
           Manfendi.
         </p>
       </div>
