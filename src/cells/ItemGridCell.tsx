@@ -28,6 +28,7 @@ const ItemCell = ({
         src={showFront ? itemFront : itemBack}
         alt="front_item"
         className="item_img"
+        loading="lazy"
       />
       {/* Renders arrows to switch to the back image if hasBack is true */}
       {hasBack && (

@@ -7,7 +7,7 @@ const footer = () => {
     <footer>
       <div className="footer-container">
         <div className="footer-column-1">
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="logo" loading="lazy" />
           <p>
             Mason And Eva comics is a new indie publishing company based in VA,
             born from two writers and their love of all things comics. We strive

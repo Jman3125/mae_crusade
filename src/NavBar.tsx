@@ -37,7 +37,13 @@ const NavBar = () => {
       <ul>
         <li>
           <a href="/">
-            <img src={logo} alt="logo" className="logo-nav" />
+            <img
+              rel="preload"
+              src={logo}
+              alt="logo"
+              className="logo-nav"
+              fetchPriority="high"
+            />
           </a>
         </li>
         <li className="hideOnMobile">

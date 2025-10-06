@@ -11,7 +11,13 @@ const item = () => {
     <div className="shop_main">
       {/* <h1>The Cowboy's Crusade</h1> */}
       <div className="main_content">
-        <img className="comic_img" src={ComicImage} alt="cowboy's crusade" />
+        <img
+          rel="preload"
+          className="comic_img"
+          src={ComicImage}
+          alt="cowboy's crusade"
+          fetchPriority="high"
+        />
 
         <div className="description_buy">
           <div>
