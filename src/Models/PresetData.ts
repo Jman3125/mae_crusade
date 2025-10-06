@@ -1,7 +1,7 @@
 import cowboyFront from '../assets/cowboy-shirt-front.png';
 import cowboyBack from '../assets/cowboy-shirt-back.png';
-import poster2 from '../assets/poster1.png';
-import poster1 from '../assets/poster2.png';
+import poster1 from '../assets/poster1.png';
+import poster2 from '../assets/poster2.png';
 import maecomicShirt from '../assets/maecomics-shirt.png';
 
 // Define the Preset type
