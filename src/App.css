@@ -215,11 +215,6 @@
   max-height: 100%;
 }
 
-.variant-shop h1 {
-    font-size: clamp(1.4rem, 10vw, 4rem);
-
-}
-
 .variant-info {
   display: flex;
   flex-direction: column;
