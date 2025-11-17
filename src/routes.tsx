@@ -7,6 +7,7 @@ import Footer from "./footer";
 import Privacy from "./legal/privacy";
 import Terms from "./legal/terms";
 import FAQ from "./faq";
+import Variants from "./variants";
 
 const routes = () => {
   const Layout = () => {
@@ -46,6 +47,10 @@ const routes = () => {
         {
           path: "/faq",
           element: <FAQ />,
+        },
+        {
+          path: "/variants",
+          element: <Variants />,
         },
       ],
     },

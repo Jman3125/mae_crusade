@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue&family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
 
 * {
   box-sizing: border-box;
@@ -44,9 +45,8 @@ button:focus-visible {
 }
 
 h1 {
-  font-size: 4em;
-  font-family: 'Bangers', cursive;
-
+  font-family: "Fjalla One", sans-serif;
+  margin: 5px 0px 0px;
 }
 
 hr {

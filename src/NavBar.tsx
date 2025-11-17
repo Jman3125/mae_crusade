@@ -31,6 +31,10 @@ const NavBar = () => {
             <a href="/privacy">Policy</a>
           </li>
           <hr />
+          <li>
+            <a href="/variants">Variants</a>
+          </li>
+          <hr />
         </ul>
       )}
 
@@ -52,7 +56,9 @@ const NavBar = () => {
         <li className="hideOnMobile">
           <a href="/privacy">Policy</a>
         </li>
-
+        <li className="hideOnMobile">
+          <a href="/variants">Variants</a>
+        </li>
         <li className="hideOnComputer" onClick={toggleSideBar}>
           <a href="#">
             <img src={menuIcon} alt="menu" className="menu_img" />

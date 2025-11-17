@@ -2,25 +2,27 @@ import "./App.css";
 import ItemGridCell from "./cells/ItemGridCell";
 import { PresetData } from "./Models/PresetData";
 import ComicImage from "./assets/comic-book.jpg";
-
+import variants from "./assets/variants.png";
 const item = () => {
   // Fetch all shirts from PresetData
   const items = PresetData.getAllPresets();
 
   return (
     <div className="shop_main">
-      {/* <h1>The Cowboy's Crusade</h1> */}
       <div className="main_content">
-        <img
-          rel="preload"
-          className="comic_img"
-          src={ComicImage}
-          alt="cowboy's crusade"
-          fetchPriority="high"
-        />
+        <div className="shopimg-container">
+          <img
+            rel="preload"
+            src={ComicImage}
+            alt="cowboy's crusade"
+            fetchPriority="high"
+          />
+          <a href="#variants">Alternative Covers Available →</a>
+        </div>
 
         <div className="description_buy">
           <div>
+            <h1>Volume 1</h1>
             <h2>About</h2>
             <span>
               In a futuristic world built upon the idea of survival of the
@@ -48,7 +50,17 @@ const item = () => {
         </div>
       </div>
 
-      <h1>Apparel</h1>
+      <div className="variant-shop" id="variants">
+        <img src={variants} alt="variants" />
+        <div className="variant-info">
+          <h1>Shop Limited Edition Variants.</h1>
+          <button onClick={() => (document.location.href = "/variants")}>
+            See More
+          </button>
+        </div>
+      </div>
+
+      <h1>APPAREL</h1>
 
       <div className="item_layout">
         {items.map((item) => (

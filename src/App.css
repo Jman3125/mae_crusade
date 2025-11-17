@@ -81,7 +81,7 @@
   z-index: 10;
   cursor: pointer;
   padding: 0;
-    border: 1px solid black;
+  border: 1px solid black;
   padding: 8px;
   border-radius: 50px;
   display: none;
@@ -120,6 +120,7 @@
   gap: 25px;
   padding: 25px;
   height: fit-content;
+  border-bottom: 1px solid rgb(52, 51, 51);
 }
 
 .main_content button {
@@ -131,15 +132,36 @@
   margin-top: 25px;
 }
 
-.comic_img {
+.shopimg-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.shopimg-container img {
   height: 500px;
+}
+
+.shopimg-container a {
+  background-color: rgba(218, 217, 217, 0.336);
+  font-size: 1.2em;
+  font-weight: 800;
+  color: black;
+  padding: 10px;
+  width: 100%;
+  border-radius: 0px 0px 25px 25px;
+}
+
+.shopimg-container a:hover {
+  background-color: rgba(218, 217, 217, 0.555);
+  color: black;
 }
 
 .description_buy {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 25px;
 }
 
 .description_buy span {
@@ -177,6 +199,108 @@
   width: 100%;
 }
 
+/* variant section on shop.tsx */
+.variant-shop {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 25px;
+
+}
+
+.variant-shop img {
+  width: 100%;
+  max-width: 600px;
+  max-height: 100%;
+}
+
+.variant-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.variant-info button {
+  background-color: #ffcc00;
+  font-size: 1.6em;
+  font-weight: 900;
+  color: white;
+}
+
+
+
+/* variants page */
+.variants-container {
+  width: 99vw;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+  text-align: center;
+}
+
+/* Variants styling */
+.variants-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  align-items: center;
+  justify-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.variant {
+  width: auto;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+
+}
+
+.variant button {
+  background-color: #f3501afe;
+  font-size: 1.6em;
+  font-weight: 900;
+  color: white;
+  padding: 10px;
+}
+
+.variant img {
+  width: 100%;
+  max-width: 400px;
+  max-height: 100%;
+}
+
+.variant-desc {
+  text-align: center;
+  font-size: 16px;
+  display: flex;
+  flex-wrap: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.variants-header{
+  color: black;
+  font-size: clamp(1.5rem, 10vw, 4rem);
+}
+
+
+.stock-variant {
+  color: red;
+  font-weight: 800;
+  padding: 5px 10px;
+  background-color: rgba(255, 0, 0, 0.176);
+  border-radius: 8px;
+}
+
+/* Navigation Bar */
 nav {
   background-color: #f3501afe;
   box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
@@ -301,6 +425,7 @@ footer {
   width: 125px;
   height: auto;
   margin-bottom: 15px;
+  cursor: pointer;
 }
 
 
@@ -689,6 +814,15 @@ footer {
   .footer-container {
     flex-direction: column;
     align-items: center;
+  }
+  .variants-main {
+    grid-template-columns: 1fr;
+  }
+
+  .variant-shop {
+    grid-template-columns: 1fr;
+    gap: 0px;
+    margin-top: 0px;
   }
 }
 
