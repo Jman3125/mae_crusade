@@ -34,7 +34,7 @@ const item = () => {
             </span>
           </div>
           <div className="button-policy">
-            <button>{"SOLD OUT - Restock Soon!"}</button>
+            <button>{"Restock Soon!"}</button>
             <p>
               By continuing to purchase you agree to our{" "}
               <a href="/terms">Terms</a> and{" "}
