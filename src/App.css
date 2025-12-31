@@ -224,7 +224,8 @@
 
 .variant-info button {
   background-color: #ffcc00;
-  font-size: 1.6em;
+  width: 50%;
+  font-size: 1.3em;
   font-weight: 900;
   color: white;
 }

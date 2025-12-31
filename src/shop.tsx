@@ -2,6 +2,7 @@ import "./App.css";
 import ItemGridCell from "./cells/ItemGridCell";
 import { PresetData } from "./Models/PresetData";
 import ComicImage from "./assets/comic-book.jpg";
+import ComicImageSoldOut from "./assets/comic-book-soldout.png";
 import variants from "./assets/variants.png";
 const item = () => {
   // Fetch all shirts from PresetData
@@ -13,7 +14,7 @@ const item = () => {
         <div className="shopimg-container">
           <img
             rel="preload"
-            src={ComicImage}
+            src={ComicImageSoldOut}
             alt="cowboy's crusade"
             fetchPriority="high"
           />
@@ -33,14 +34,7 @@ const item = () => {
             </span>
           </div>
           <div className="button-policy">
-            <button
-              onClick={() =>
-                (window.location.href =
-                  "https://buy.stripe.com/4gM9AMgaCgT5062aIQ77O00")
-              }
-            >
-              {"$5 - "}Buy Now
-            </button>
+            <button>{"SOLD OUT - Restock Soon!"}</button>
             <p>
               By continuing to purchase you agree to our{" "}
               <a href="/terms">Terms</a> and{" "}
