@@ -14,7 +14,7 @@ const item = () => {
         <div className="shopimg-container">
           <img
             rel="preload"
-            src={ComicImageSoldOut}
+            src={ComicImage}
             alt="cowboy's crusade"
             fetchPriority="high"
           />
@@ -34,7 +34,14 @@ const item = () => {
             </span>
           </div>
           <div className="button-policy">
-            <button>{"Restock Soon!"}</button>
+            <button
+              onClick={() =>
+                (window.location.href =
+                  "https://buy.stripe.com/4gM9AMgaCgT5062aIQ77O00")
+              }
+            >
+              {"Buy Now"}
+            </button>
             <p>
               By continuing to purchase you agree to our{" "}
               <a href="/terms">Terms</a> and{" "}
