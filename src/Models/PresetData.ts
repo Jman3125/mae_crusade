@@ -1,7 +1,7 @@
 import cowboyFront from '../assets/cowboy-shirt-front.png';
 import cowboyBack from '../assets/cowboy-shirt-back.png';
-import poster1 from '../assets/poster1.png';
-import poster2 from '../assets/poster2.png';
+// import poster1 from '../assets/poster1.png';
+// import poster2 from '../assets/poster2.png';
 import maecomicShirt from '../assets/maecomics-shirt.png';
 
 // Define the Preset type
@@ -32,16 +32,16 @@ export class PresetData {
             hasBack: true,
             showSize: true, // This shirt has size options
         },
-        {
-            id: "item-2",
-            title: "Cowboy's Crusade Poster",
-            description: 'White Border Cowboy\'s Crusade Cover Art Poster. Size: 12"x18"',
-            price: 18,
-            item1: poster2,
-            item2: poster1,
-            hasBack: true, 
-            showSize: false, // This shirt has size options not needed on posters
-        },
+        // {
+        //     id: "item-2",
+        //     title: "Cowboy's Crusade Poster",
+        //     description: 'White Border Cowboy\'s Crusade Cover Art Poster. Size: 12"x18"',
+        //     price: 18,
+        //     item1: poster2,
+        //     item2: poster1,
+        //     hasBack: true, 
+        //     showSize: false, // This shirt has size options not needed on posters
+        // },
         {
             id: "item-3",
             title: "MAE Comics Tee",
